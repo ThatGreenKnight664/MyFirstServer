@@ -1,12 +1,24 @@
 const express = require("express");
+const db = require('./db');
 
 const app = express();
 const PORT = 3000;
 
-app.get("/",(req, res) => {
-    res.send("<h1>Hello from my server! ehehehehe</h1>");
+app.set('view engine', 'ejs');
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+    const posts = db.prepare('SELECT * FROM posts ORDER BY id DESC').all();
+    res.render('index', { posts });
 });
 
+app.get('/post/:id', (req, res) => {
+    const post = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
+    if (!post) {
+        return res.status(404).send("post not found :(");
+    }
+    res.render("post", { post });
+});
 app.listen(PORT, () => {
     console.log("Sever running at http://localhost:" + PORT);
 });
