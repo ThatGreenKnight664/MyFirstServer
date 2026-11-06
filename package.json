@@ -17,5 +17,13 @@
     "express": "^5.3.0",
     "express-session": "^1.19.0"
   },
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatGreenKnight664/MyFirstServer.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/ThatGreenKnight664/MyFirstServer/issues"
+  },
+  "homepage": "https://github.com/ThatGreenKnight664/MyFirstServer#readme"
 }

@@ -1,11 +1,23 @@
 const express = require("express");
+const session = require('express-session')
+const bcrypt = require('bcyrptjs')
 const db = require('./db');
-
 const app = express();
 const PORT = 3000;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: false }));
+app.use(session({
+    secret: "megaman2",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+});
 
 app.get('/', (req, res) => {
     const posts = db.prepare('SELECT * FROM posts ORDER BY id DESC').all();
