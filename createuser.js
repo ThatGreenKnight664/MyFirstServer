@@ -1,4 +1,4 @@
-const bcyript = require('bcryptjs')
+const bcrypt = require('bcryptjs')
 const db = require('./db')
 
 const username = process.argv[2];
